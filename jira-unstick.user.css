@@ -1,0 +1,67 @@
+/* ==UserStyle==
+@name           Jira - Unstick
+@description    Makes all bars and headers static and scrolling, and reduces some excessive padding.
+@license        Unlicense
+@namespace      none
+@version        1.0.0
+==/UserStyle== */
+
+@-moz-document regexp("https://.+\.atlassian\.net/jira/software/c/projects/.+/boards/.+") {
+	body,
+	body.ghx-scroll-columns:not(.ghx-board-configure) {
+		overflow: unset !important;
+	}
+	#ak-jira-navigation {
+		position: absolute !important;
+	}
+	#jira-frontend > [style="height: 100vh;"],
+	[data-ds--page-layout--slot="main"],
+	[data-test-id="software-board.board"] {
+		height: auto !important;
+	}
+	[data-test-id="software-board.board"],
+   [data-test-id="software-board.board"] > div:nth-child(1) > div:nth-child(2),
+   [data-test-id="platform-board-kit.ui.board.scroll.board-scroll"] {
+		height: auto !important;
+		overflow: unset !important;
+	}
+	/* Sidebar expander, fill header space when scrolled down */
+	#ak-side-navigation > style:first-child + div {
+		top: 0;
+	}
+	button[data-testid="ContextualNavigation-resize-button"] {
+		top: calc(26px + var(--bannerHeight, 0px) + var(--topNavigationHeight, 0px));
+	}
+	button[data-testid="ContextualNavigation-grab-area"] {
+		width: 12px;
+	}
+	/* Draggable minimap for horizontal scroll doesn't work, delete */
+	[data-testid="layout-controller.ui.bottom-right-corner.container.styled-container"] {
+		display: none;
+	}
+	/* Reduce board card padding */
+	[data-test-id="platform-card.ui.card.focus-container"] div[class$="_content"],
+	[data-test-id="platform-card.ui.card.focus-container"] div[class*="_content "] {
+		padding-block: 0.3rem;
+		padding-inline: 0.6rem;
+	}
+	[data-test-id="platform-card.ui.card.focus-container"] div[class$="_content"] > :first-child > div > span,
+	[data-test-id="platform-card.ui.card.focus-container"] div[class*="_content "] > :first-child > div > span {
+		padding-inline-end: 0;
+	}
+	[data-test-id="platform-card.ui.card.actions-section"] {
+		right: 0;
+		top: 0;
+	}
+	/* Reduce some other vertical padding for EVEN MORE SPACE */
+	[data-test-id="software-board.board"] > :first-child > :first-child > :only-child {
+		margin-top: 0.5rem;
+		margin-bottom: 0;
+	}
+	[data-test-id="software-board.board"] > :first-child > :first-child > :only-child > :nth-child(3) {
+		margin-top: 0;
+	}
+	[data-test-id="software-board.board"] > :first-child > :first-child > :only-child > :nth-child(3) > :only-child {
+		margin-bottom: 0.75rem;
+	}
+}

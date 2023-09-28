@@ -1,0 +1,60 @@
+/* ==UserStyle==
+@name           Confluence - Unstick
+@description    Makes most bars and headers static and scrolling.
+@license        Unlicense
+@namespace      none
+@version        1.0.0
+==/UserStyle== */
+
+@-moz-document regexp("https://.+.atlassian\.net/wiki/*") {
+	/* Scroll site header */
+	[data-layout-container="true"] {
+		display: block !important;
+	}
+	[data-testid="grid-topNav"] {
+		position: static !important;
+	}
+	/* Fix sticky sidebar placement */
+	[data-layout-container="true"] > div:nth-child(2) > div:first-child,
+	#AkSideNavigation {
+		display: flex;
+		flex-direction: column;
+	}
+	#AkSideNavigation,
+	#AkSideNavigation > div {
+		flex-grow: 1;
+	}
+	#AkSideNavigation > div {
+		position: sticky !important;
+	}
+	button[data-testid="grid-left-sidebar-resize-button"] {
+		position: fixed;
+		left: 24px;
+		top: 88px;
+	}
+	/* Unstick page header */
+	[data-test-id="header-animated-box"],
+	[data-test-id="header-animated-box"] > div {
+		position: static !important;
+	}
+	/* Fix sticky table header spacing */
+	[data-testid="sticky-table-fixed"][mode="stick"] {
+		top: 0 !important;
+	}
+	/* ??? */
+	.pm-table-sticky-wrapper {
+		display: none !important;
+	}
+	/* Fix sticky toolbar position */
+	[data-test-id="with-sticky-header"],
+	[data-testid="with-sticky-header"] {
+		top: 0 !important;
+	}
+	#content-header-container.stuck-state-top {
+		min-height: unset;
+		padding-top: 0;
+	}
+	.stuck-state-top [data-testid="gpb-common"] > div {
+		min-height: unset;
+	}
+}

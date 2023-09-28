@@ -1,0 +1,120 @@
+/* ==UserStyle==
+@name           Slack - More Content
+@description    Remove LCARS border, shrink headers and sidebars, hide search unless hovered or focused.
+@license        Unlicense
+@namespace      none
+@version        1.0.0
+==/UserStyle== */
+
+@-moz-document regexp("https://app\.slack\.com/client/.+") {
+	html {
+		--userstyle-header-height: 39px;
+		--userstyle-tabrail-width: 46px;
+		--userstyle-search-height-collapsed: 6px;
+	}
+	/* Get rid of colored frame all the way around the window */
+	.p-ia4_client .p-client_workspace {
+		padding-bottom: 0;
+		padding-right: 0;
+	}
+	.p-ia4_client .p-client_workspace__layout {
+		border-top-right-radius: 0;
+		border-bottom-left-radius: 0;
+		border-bottom-right-radius: 0;
+	}
+	.sk-client-theme--dark .p-ia4_client .p-client_workspace__layout {
+		border-bottom: 0;
+		border-right: 0;
+	}
+	.p-ia4_client.p-ia4_client--with-top-nav .p-view_contents--primary,
+	.p-ia4_client.p-ia4_client--with-top-nav .p-view_contents--secondary,
+	.p-ia4_client.p-ia4_client--with-top-nav .p-view_contents--sidebar,
+	.p-ia4_client.p-ia4_client--with-search-in-top-nav .p-view_contents--primary, 
+	.p-ia4_client.p-ia4_client--with-search-in-top-nav .p-view_contents--secondary, 
+	.p-ia4_client.p-ia4_client--with-search-in-top-nav .p-view_contents--sidebar {
+   	max-height: calc(100vh - var(--userstyle-search-height-collapsed));
+	}
+	/* Reduce width of leftmost "tab" sidebar */
+	.p-ia4_client,
+	.p-ia4_client .p-client_workspace--including_tab_rail {
+		grid-template-columns: var(--userstyle-tabrail-width) auto;
+	}
+	.tab_rail,
+	.p-tab_rail,
+	.p-control_strip {
+		width: var(--userstyle-tabrail-width);
+	}
+	/* Show top bar on hover or focus only */
+	.p-ia4_client.p-ia4_client--with-top-nav,
+	.p-ia4_client.p-ia4_client--with-search-in-top-nav {
+		grid-template-rows: var(--userstyle-search-height-collapsed) auto;
+	}
+	.p-ia4_client .p-ia4_top_nav {
+		--userstyle-search-height-expanded: 36px;
+		background: rgba(var(--sk_primary_background,255,255,255),1);
+		position: fixed;
+		grid-column: unset;
+		height: var(--userstyle-search-height-expanded);
+		left: 0;
+		opacity: 0;
+		right: 0;
+		top: calc(-1 * (var(--userstyle-search-height-expanded) - var(--userstyle-search-height-collapsed)));
+		transition: 0.5s linear;
+		transition-delay: 0.5s;
+		transition-property: opacity, top;
+		z-index: 9999;
+	}
+	.p-ia4_client.p-ia4_client--with-search-in-top-nav .p-ia4_top_nav {
+		--userstyle-search-height-expanded: 44px;
+	}
+	.p-ia4_client .p-ia4_top_nav:hover,
+	.p-ia4_client .p-ia4_top_nav:focus-within {
+		opacity: 1;
+		top: 0;
+		transition-delay: 0;
+		transition-duration: 0.1s;
+	}
+	/* Reduce vertical padding in header bars */
+	.p-ia4_sidebar_header.p-ia4_home_header,
+	.p-view_header {
+		height: var(--userstyle-header-height);
+		min-height: var(--userstyle-header-height);
+	}
+	/* Reduce top padding in channel sidebar */
+	.p-channel_sidebar__static_list {
+		transform: translateY(-4px);
+	}
+	/* Reduce horizontal padding in channel list */
+	.p-ia4_sidebar_header.p-ia4_home_header {
+	    padding-inline: 4px 0;
+	}
+	.p-channel_sidebar__static_list__item__row_container {
+		border-radius: 0;
+    	padding: 0;
+	}
+	.p-channel_sidebar__static_list__item__row_container .p-channel_sidebar__channel--selected, .p-channel_sidebar__static_list__item__row_container .p-channel_sidebar__link, .p-channel_sidebar__static_list__item__row_container .p-channel_sidebar__link--add-more-items, .p-channel_sidebar__static_list__item__row_container .p-channel_sidebar__link:hover, .p-channel_sidebar__static_list__item__row_container .p-channel_sidebar__section-heading--pages-drawer:hover {
+		border-radius: 0;
+	}
+	.p-channel_sidebar--iap1 .p-channel_sidebar__channel, 
+	.p-channel_sidebar--iap1 .p-channel_sidebar__link, 
+	.p-channel_sidebar--iap1 .p-channel_sidebar__section_heading, 
+	.p-channel_sidebar--iap1 .p-channel_sidebar__section_placeholder {
+		padding-inline: 12px 8px;
+	}
+	.p-channel_sidebar--iap1 .p-channel_sidebar__section_heading.p-channel_sidebar__section_heading_channels, 
+	.p-drag_layer .p-channel_sidebar__section_heading.p-channel_sidebar__section_heading_channels {
+		margin-inline: 0;
+		padding-inline: 12px 16px;
+	}
+	/* Reduce padding around input box */
+	.p-workspace__primary_view_footer--float {
+		margin-block-start: -16px;
+	}
+	.p-notification_bar {
+		height: auto;
+	}
+	.p-notification_bar__section {
+		height: 1.2rem;
+		padding-top: 0.2rem;
+	}
+}
