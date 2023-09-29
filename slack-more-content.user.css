@@ -3,7 +3,7 @@
 @description    Remove LCARS border, shrink headers and sidebars, hide search unless hovered or focused.
 @license        Unlicense
 @namespace      none
-@version        1.0.0
+@version        1.1.0
 ==/UserStyle== */
 
 @-moz-document regexp("https://app\.slack\.com/client/.+") {
@@ -26,30 +26,40 @@
 		border-bottom: 0;
 		border-right: 0;
 	}
+	/* Reduce width of left "tab" sidebar(s) */
+	.p-ia4_client,
+	.p-ia4_client .p-client_workspace--including_tab_rail,
+	.p-ia4_client.p-ia4_client--workspace-switcher-prototype-on .p-client_workspace--including_tab_rail {
+		grid-template-columns: var(--userstyle-tabrail-width) auto;
+	}
+	.p-workspace_switcher_prototype,
+	.p-tab_rail,
+	.p-control_strip {
+		width: var(--userstyle-tabrail-width);
+	}
+	.p-control_strip {
+		padding-block-end: 1.2rem;
+	}
+	/* Show top bar on hover or focus only */
 	.p-ia4_client.p-ia4_client--with-top-nav .p-view_contents--primary,
 	.p-ia4_client.p-ia4_client--with-top-nav .p-view_contents--secondary,
 	.p-ia4_client.p-ia4_client--with-top-nav .p-view_contents--sidebar,
 	.p-ia4_client.p-ia4_client--with-search-in-top-nav .p-view_contents--primary, 
 	.p-ia4_client.p-ia4_client--with-search-in-top-nav .p-view_contents--secondary, 
-	.p-ia4_client.p-ia4_client--with-search-in-top-nav .p-view_contents--sidebar {
+	.p-ia4_client.p-ia4_client--with-search-in-top-nav .p-view_contents--sidebar,
+	.p-ia4_client.p-ia4_client--workspace-switcher-prototype-on .p-client_workspace {
+		height: calc(100vh - var(--userstyle-search-height-collapsed));
    	max-height: calc(100vh - var(--userstyle-search-height-collapsed));
 	}
-	/* Reduce width of leftmost "tab" sidebar */
-	.p-ia4_client,
-	.p-ia4_client .p-client_workspace--including_tab_rail {
-		grid-template-columns: var(--userstyle-tabrail-width) auto;
+	.p-ia4_client.p-ia4_client--workspace-switcher-prototype-on .p-client_workspace--including_tab_rail {
+		margin-top: var(--userstyle-search-height-collapsed);
 	}
-	.tab_rail,
-	.p-tab_rail,
-	.p-control_strip {
-		width: var(--userstyle-tabrail-width);
-	}
-	/* Show top bar on hover or focus only */
 	.p-ia4_client.p-ia4_client--with-top-nav,
 	.p-ia4_client.p-ia4_client--with-search-in-top-nav {
 		grid-template-rows: var(--userstyle-search-height-collapsed) auto;
 	}
-	.p-ia4_client .p-ia4_top_nav {
+	.p-ia4_client .p-ia4_top_nav,
+	.p-ia4_client.p-ia4_client--workspace-switcher-prototype-on .p-ia4_top_nav {
 		--userstyle-search-height-expanded: 36px;
 		background: rgba(var(--sk_primary_background,255,255,255),1);
 		position: fixed;
@@ -64,7 +74,8 @@
 		transition-property: opacity, top;
 		z-index: 9999;
 	}
-	.p-ia4_client.p-ia4_client--with-search-in-top-nav .p-ia4_top_nav {
+	.p-ia4_client.p-ia4_client--with-search-in-top-nav .p-ia4_top_nav,
+	.p-ia4_client.p-ia4_client--workspace-switcher-prototype-on .p-ia4_top_nav {
 		--userstyle-search-height-expanded: 44px;
 	}
 	.p-ia4_client .p-ia4_top_nav:hover,
