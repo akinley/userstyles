@@ -3,7 +3,7 @@
 @description    Remove LCARS border, shrink headers and sidebars, hide search unless hovered or focused.
 @license        Unlicense
 @namespace      none
-@version        1.1.0
+@version        1.1.1
 ==/UserStyle== */
 
 @-moz-document regexp("https://app\.slack\.com/client/.+") {
@@ -86,6 +86,8 @@
 		transition-duration: 0.1s;
 	}
 	/* Reduce vertical padding in header bars */
+	.p-flexpane--ia_details_popover .p-flexpane_header__primary,
+	.p-flexpane--iap1 .p-flexpane_header__primary,
 	.p-ia4_sidebar_header.p-ia4_home_header,
 	.p-view_header {
 		height: var(--userstyle-header-height);
