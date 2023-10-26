@@ -3,12 +3,13 @@
 @description    Makes all bars and headers static and scrolling, and reduces some excessive padding.
 @license        Unlicense
 @namespace      none
-@version        1.0.0
+@version        1.0.1
 ==/UserStyle== */
 
 @-moz-document regexp("https://.+\.atlassian\.net/jira/software/c/projects/.+/boards/.+") {
 	body,
 	body.ghx-scroll-columns:not(.ghx-board-configure) {
+		min-width: unset !important;
 		overflow: unset !important;
 	}
 	#ak-jira-navigation {
@@ -20,10 +21,18 @@
 		height: auto !important;
 	}
 	[data-test-id="software-board.board"],
-   [data-test-id="software-board.board"] > div:nth-child(1) > div:nth-child(2),
-   [data-test-id="platform-board-kit.ui.board.scroll.board-scroll"] {
+	[data-test-id="software-board.board"] > div:nth-child(1) > div:nth-child(2),
+	[data-test-id="platform-board-kit.ui.board.scroll.board-scroll"] {
+		--board-scroll-element-height: auto !important;
 		height: auto !important;
+		max-height: unset !important;
 		overflow: unset !important;
+	}
+	[data-test-id="platform-board-kit.ui.board.scroll.board-scroll"] > section {
+		display: block !important;
+	}
+	[data-test-id="platform-board-kit.ui.board.scroll.board-scroll"] > section > div > div {
+		min-height: unset !important;
 	}
 	/* Sidebar expander, fill header space when scrolled down */
 	#ak-side-navigation > style:first-child + div {
