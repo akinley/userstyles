@@ -3,7 +3,7 @@
 @description    Remove LCARS border, shrink headers and sidebars, hide search unless hovered or focused.
 @license        Unlicense
 @namespace      none
-@version        1.1.1
+@version        1.1.2
 ==/UserStyle== */
 
 @-moz-document regexp("https://app\.slack\.com/client/.+") {
@@ -28,6 +28,7 @@
 	}
 	/* Reduce width of left "tab" sidebar(s) */
 	.p-ia4_client,
+	.p-ia4_client .p-client_workspace_wrapper,
 	.p-ia4_client .p-client_workspace--including_tab_rail,
 	.p-ia4_client.p-ia4_client--workspace-switcher-prototype-on .p-client_workspace--including_tab_rail {
 		grid-template-columns: var(--userstyle-tabrail-width) auto;
@@ -44,8 +45,8 @@
 	.p-ia4_client.p-ia4_client--with-top-nav .p-view_contents--primary,
 	.p-ia4_client.p-ia4_client--with-top-nav .p-view_contents--secondary,
 	.p-ia4_client.p-ia4_client--with-top-nav .p-view_contents--sidebar,
-	.p-ia4_client.p-ia4_client--with-search-in-top-nav .p-view_contents--primary, 
-	.p-ia4_client.p-ia4_client--with-search-in-top-nav .p-view_contents--secondary, 
+	.p-ia4_client.p-ia4_client--with-search-in-top-nav .p-view_contents--primary,
+	.p-ia4_client.p-ia4_client--with-search-in-top-nav .p-view_contents--secondary,
 	.p-ia4_client.p-ia4_client--with-search-in-top-nav .p-view_contents--sidebar,
 	.p-ia4_client.p-ia4_client--workspace-switcher-prototype-on .p-client_workspace {
 		height: calc(100vh - var(--userstyle-search-height-collapsed));
@@ -108,13 +109,13 @@
 	.p-channel_sidebar__static_list__item__row_container .p-channel_sidebar__channel--selected, .p-channel_sidebar__static_list__item__row_container .p-channel_sidebar__link, .p-channel_sidebar__static_list__item__row_container .p-channel_sidebar__link--add-more-items, .p-channel_sidebar__static_list__item__row_container .p-channel_sidebar__link:hover, .p-channel_sidebar__static_list__item__row_container .p-channel_sidebar__section-heading--pages-drawer:hover {
 		border-radius: 0;
 	}
-	.p-channel_sidebar--iap1 .p-channel_sidebar__channel, 
-	.p-channel_sidebar--iap1 .p-channel_sidebar__link, 
-	.p-channel_sidebar--iap1 .p-channel_sidebar__section_heading, 
+	.p-channel_sidebar--iap1 .p-channel_sidebar__channel,
+	.p-channel_sidebar--iap1 .p-channel_sidebar__link,
+	.p-channel_sidebar--iap1 .p-channel_sidebar__section_heading,
 	.p-channel_sidebar--iap1 .p-channel_sidebar__section_placeholder {
 		padding-inline: 12px 8px;
 	}
-	.p-channel_sidebar--iap1 .p-channel_sidebar__section_heading.p-channel_sidebar__section_heading_channels, 
+	.p-channel_sidebar--iap1 .p-channel_sidebar__section_heading.p-channel_sidebar__section_heading_channels,
 	.p-drag_layer .p-channel_sidebar__section_heading.p-channel_sidebar__section_heading_channels {
 		margin-inline: 0;
 		padding-inline: 12px 16px;
