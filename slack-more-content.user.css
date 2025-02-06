@@ -3,7 +3,7 @@
 @description    Remove LCARS border, shrink headers and sidebars, hide search unless hovered or focused.
 @license        Unlicense
 @namespace      none
-@version        1.1.4
+@version        1.1.6
 ==/UserStyle== */
 
 @-moz-document regexp("https://app\.slack\.com/client/.+") {
@@ -13,6 +13,9 @@
 		--userstyle-search-height-collapsed: 6px;
 	}
 	/* Get rid of colored frame all the way around the window */
+	.p-theme_background {
+		inset: 0;
+	}
 	.p-ia4_client .p-client_workspace {
 		padding-bottom: 0;
 		padding-right: 0;
@@ -30,16 +33,39 @@
 	.p-ia4_client,
 	.p-ia4_client .p-client_workspace_wrapper,
 	.p-ia4_client .p-client_workspace--including_tab_rail,
-	.p-ia4_client.p-ia4_client--workspace-switcher-prototype-on .p-client_workspace--including_tab_rail {
+	/* NEW November 2024 */
+	.p-ia4_client.p-ia4_client--workspace-switcher-prototype-on .p-client_workspace--including_tab_rail,
+	.p-ia4_client.p-ia4_client--narrow-feature-on .p-client_workspace_wrapper:not(.p-client_workspace_wrapper--with-split-view) {
 		grid-template-columns: var(--userstyle-tabrail-width) auto;
 	}
 	.p-workspace_switcher_prototype,
 	.p-tab_rail,
-	.p-control_strip {
+	.p-control_strip,
+	/* NEW November 2024 */
+	.p-ia4_client--narrow-feature-on .p-tab_rail,
+	.p-ia4_client--narrow-feature-on .p-control_strip {
 		width: var(--userstyle-tabrail-width);
 	}
 	.p-control_strip {
-		padding-block-end: 1.2rem;
+		padding-block-end: 0.6rem;
+	}
+	.p-tab_rail {
+		padding-top: 0.2rem;
+	}
+	.p-tab_rail__button .c-tabs__tab_content {
+		padding: 4px 0;
+	}
+	.p-tab_rail__button .p-tab_rail__button__label {
+		display: none;
+	}
+	.p-tab_rail__button:hover .p-tab_rail__button__label,
+	.p-tab_rail__button:focus .p-tab_rail__button__label {
+		background-color: var(--dt_color-theme-surf-inv-sec);
+		border-radius: 4px;
+		display: block;
+		padding: 0.25em 0.4em;
+		position: absolute;
+		inset-block-start: -0.5em;
 	}
 	/* Show top bar on hover or focus only */
 	.p-ia4_client .p-client_workspace_wrapper,
@@ -49,14 +75,18 @@
 	.p-ia4_client.p-ia4_client--with-search-in-top-nav .p-view_contents--primary,
 	.p-ia4_client.p-ia4_client--with-search-in-top-nav .p-view_contents--secondary,
 	.p-ia4_client.p-ia4_client--with-search-in-top-nav .p-view_contents--sidebar,
-	.p-ia4_client.p-ia4_client--workspace-switcher-prototype-on .p-client_workspace {
+	.p-ia4_client.p-ia4_client--workspace-switcher-prototype-on .p-client_workspace,
+	/* January 2025 */
+	.p-ia4_client .p-view_contents--primary,
+	.p-ia4_client .p-view_contents--secondary,
+	.p-ia4_client .p-view_contents--sidebar {
 		height: calc(100vh - var(--userstyle-search-height-collapsed));
    	max-height: calc(100vh - var(--userstyle-search-height-collapsed));
 	}
 	.p-ia4_client .p-client_workspace_wrapper,
 	.p-ia4_client.p-ia4_client--workspace-switcher-prototype-on .p-client_workspace_wrapper,
 	.p-ia4_client.p-ia4_client--workspace-switcher-prototype-on .p-client_workspace--including_tab_rail {
-		margin-top: var(--userstyle-search-height-collapsed);
+		padding-top: var(--userstyle-search-height-collapsed);
 	}
 	.p-ia4_client.p-ia4_client--with-top-nav,
 	.p-ia4_client.p-ia4_client--with-search-in-top-nav {
@@ -76,7 +106,7 @@
 		transition: 0.5s linear;
 		transition-delay: 0.5s;
 		transition-property: opacity, top;
-		z-index: 9999;
+		z-index: 1000; /* .popover is 1001 */
 	}
 	.p-ia4_client.p-ia4_client--with-search-in-top-nav .p-ia4_top_nav,
 	.p-ia4_client.p-ia4_client--workspace-switcher-prototype-on .p-ia4_top_nav {
@@ -100,6 +130,15 @@
 	/* Reduce top padding in channel sidebar */
 	.p-channel_sidebar__static_list {
 		transform: translateY(-4px);
+	}
+	/* Fix inconsistent button sizing in channel sidebar header */
+	.p-home_header_controls__composer_button {
+		border-radius: var(--sk_button-styles-radius, 8px);
+		height: var(--sk-button-size, 36px);
+		width: var(--sk-button-size, 36px);
+	}
+	.p-home_header_controls__composer_button--highlight {
+		border: 0;
 	}
 	/* Reduce horizontal padding in channel list */
 	.p-ia4_sidebar_header.p-ia4_home_header {
